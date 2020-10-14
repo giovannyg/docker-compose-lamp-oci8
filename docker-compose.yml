@@ -13,6 +13,9 @@ services:
     depends_on:
       - php
       - mysql
+    extra_hosts: 
+      - "api.uteg.web:172.19.0.2"
+      - "admin.uteg.web:172.19.0.2"
   php:
     image: 'lamp_oci8_php'
     container_name: 'lamp_oci8_php'
@@ -21,6 +24,9 @@ services:
     volumes:
       - ./public_html:/usr/local/apache2/htdocs
       - ./tmp:/usr/local/tmp
+    extra_hosts: 
+      - "api.uteg.web:172.19.0.2"
+      - "admin.uteg.web:172.19.0.2"
   mysql:
     image: 'lamp_oci8_mysql'
     container_name: 'lamp_oci8_mysql'
