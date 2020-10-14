@@ -1,0 +1,33 @@
+version: '3.7'
+services:
+  apache:
+    image: 'lamp_oci8_apache'
+    container_name: 'lamp_oci8_apache'
+    build: './apache'
+    restart: always
+    ports: 
+      - 80:80
+      - 443:443
+    volumes:
+      - ./public_html:/usr/local/apache2/htdocs
+    depends_on:
+      - php
+      - mysql
+  php:
+    image: 'lamp_oci8_php'
+    container_name: 'lamp_oci8_php'
+    build: './php'
+    restart: always
+    volumes:
+      - ./public_html:/usr/local/apache2/htdocs
+      - ./tmp:/usr/local/tmp
+  mysql:
+    image: 'lamp_oci8_mysql'
+    container_name: 'lamp_oci8_mysql'
+    build: './mysql'
+    restart: always
+    ports:
+      - 3306:3306
+    volumes:
+      - ./database:/var/lib/mysql
+
